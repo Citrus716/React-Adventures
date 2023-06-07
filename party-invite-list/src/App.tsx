@@ -22,10 +22,17 @@ function App() {
     },
   ]);
 
+  const onClick = (p: IState["people"][0]): void => {
+    const newPeople = people.filter((person) => {
+      return person !== p;
+    });
+    setPeople(newPeople);
+  };
+
   return (
     <div className="App">
       <h1>People invited to my Party</h1>
-      <List people={people}></List>
+      <List people={people} onClick={onClick}></List>
       <AddToList people={people} setPeople={setPeople}></AddToList>
     </div>
   );
