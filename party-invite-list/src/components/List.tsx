@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { IState as IProps } from "../App";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -8,6 +9,13 @@ interface Props {
 
 const List = ({ people, onClick }: Props) => {
   const renderList = (): JSX.Element[] => {
+    const [color, setColor] = useState("primary");
+    const onMouseEnter = () => {
+      setColor("danger");
+    };
+    const onMouseLeave = () => {
+      setColor("primary");
+    };
     return people.map((person) => {
       return (
         <li className="List">
@@ -19,8 +27,10 @@ const List = ({ people, onClick }: Props) => {
           <p className="List-note">{person.note}</p>
           <button
             type="button"
-            className="btn btn-primary"
+            className={"btn btn-" + color}
             onClick={() => onClick(person)}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
           >
             Remove
           </button>
